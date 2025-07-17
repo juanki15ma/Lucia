@@ -4,28 +4,14 @@
  * @fileOverview AI-powered Love Note Generator for personalized compliments.
  *
  * - generateLoveNote - A function that generates sweet compliments about Lucia.
- * - GenerateLoveNoteInput - The input type for the generateLoveNote function.
  * - GenerateLoveNoteOutput - The return type for the generateLoveNote function.
  */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
-const GenerateLoveNoteInputSchema = z.object({
-  personName: z.string().describe('The name of the person to compliment.'),
-  relationship: z
-    .string()
-    .describe('Your relationship with the person (e.g., girlfriend, wife).'),
-  occasion: z
-    .string()
-    .describe('The occasion for the love note (e.g., date proposal, anniversary).'),
-  aspects: z
-    .string()
-    .describe(
-      'Specific aspects or qualities you love about the person (e.g., her smile, her kindness).'
-    ),
-});
-export type GenerateLoveNoteInput = z.infer<typeof GenerateLoveNoteInputSchema>;
+// No input is needed anymore as the details are hardcoded in the prompt.
+export type GenerateLoveNoteInput = void;
 
 const GenerateLoveNoteOutputSchema = z.object({
   loveNote: z.string().describe('A sweet, personalized love note.'),
@@ -38,19 +24,25 @@ export async function generateLoveNote(input: GenerateLoveNoteInput): Promise<Ge
 
 const prompt = ai.definePrompt({
   name: 'generateLoveNotePrompt',
-  input: {schema: GenerateLoveNoteInputSchema},
   output: {schema: GenerateLoveNoteOutputSchema},
-  prompt: `You are a professional love note writer. Create a heartfelt and sweet love note for {{personName}}, my {{relationship}}, for our {{occasion}}. Focus on the following aspects: {{aspects}}.`,
+  prompt: `Eres un escritor de notas de amor con mucho ingenio. Crea un piropo o una nota corta, sentida y dulce para Lucia.
+
+Aquí tienes algunos detalles sobre ella para que te inspires:
+- Es guapa, inteligente, ingeniera y valiente.
+- Le encanta leer, la música rock y viajar.
+- Tiene un gato que se llama Tejón.
+- Le apasionan las motos, admira a Valentino Rossi y a Lewis Hamilton de la F1.
+
+Usa uno o varios de estos detalles para crear un mensaje original y cariñoso. Sé creativo y romántico.`,
 });
 
 const generateLoveNoteFlow = ai.defineFlow(
   {
     name: 'generateLoveNoteFlow',
-    inputSchema: GenerateLoveNoteInputSchema,
     outputSchema: GenerateLoveNoteOutputSchema,
   },
-  async input => {
-    const {output} = await prompt(input);
+  async () => {
+    const {output} = await prompt({});
     return output!;
   }
 );
