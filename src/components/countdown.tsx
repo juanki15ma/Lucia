@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react';
 const Countdown = () => {
   const calculateTimeLeft = () => {
     // Set a fixed future date for the proposal to avoid hydration issues
-    // and ensure consistency. Let's say next Friday at 8:00 PM.
+    // and ensure consistency. Let's say next Saturday at 9:00 PM.
     const targetDate = new Date();
     const currentDay = targetDate.getDay(); // 0 (Sun) to 6 (Sat)
-    const daysUntilFriday = (5 - currentDay + 7) % 7 || 7; // If today is Friday, aim for next Friday
-    targetDate.setDate(targetDate.getDate() + daysUntilFriday);
-    targetDate.setHours(20, 0, 0, 0); // 8:00 PM
+    const daysUntilSaturday = (6 - currentDay + 7) % 7 || 7; // If today is Saturday, aim for next Saturday
+    targetDate.setDate(targetDate.getDate() + daysUntilSaturday);
+    targetDate.setHours(21, 0, 0, 0); // 9:00 PM
 
     const difference = +targetDate - +new Date();
     let timeLeft = {};

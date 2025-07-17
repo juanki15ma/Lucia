@@ -2,7 +2,6 @@ import { Heart, UtensilsCrossed, CalendarClock } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Countdown from "@/components/countdown";
 import LoveNoteGenerator from "@/components/love-note-generator";
-import ShareButton from "@/components/share-button";
 import Image from "next/image";
 
 export default function Home() {
@@ -72,7 +71,6 @@ export default function Home() {
           </section>
 
           <footer className="pt-8 animate-fade-in-up animation-delay-700">
-            <ShareButton />
           </footer>
         </div>
       </main>
