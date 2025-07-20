@@ -43,7 +43,7 @@ export default function Home() {
                   className="text-4xl md:text-6xl font-headline text-accent font-bold tracking-wider"
                   style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.1)" }}
                 >
-                  Chifle Pizza
+                  Chifla Pizza
                 </h3>
               </div>
               <p className="font-body text-lg max-w-2xl text-foreground/80">
